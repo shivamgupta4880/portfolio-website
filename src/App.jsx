@@ -63,6 +63,21 @@ const projects = [
     accent: 'from-cyan-400 to-blue-600',
   },
   {
+    title: 'DevChat',
+    subtitle: 'Real-Time Messaging Platform',
+    tech: ['MERN', 'Socket.IO', 'Docker', 'JWT', 'Nginx'],
+    features: [
+      'Real-time messaging with Socket.IO',
+      'Responsive chat interface for modern devices',
+      'JWT Authentication and protected routes',
+      'Container-ready deployment workflow',
+      'Production deployment on Vercel',
+    ],
+    live: 'https://dev-chat-wine.vercel.app/',
+    github: 'https://github.com/shivamgupta4880/DevChat',
+    accent: 'from-emerald-400 to-cyan-600',
+  },
+  {
     title: 'DevOps Automation Platform',
     subtitle: 'Infrastructure Delivery Suite',
     tech: ['AWS', 'Terraform', 'Docker', 'Jenkins'],
