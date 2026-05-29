@@ -20,7 +20,7 @@ import {
   Terminal,
   X,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import shivamPhoto from './assets/shivam.jpg';
 
 const navItems = ['About', 'Skills', 'Projects', 'Experience', 'Certifications', 'Contact'];
@@ -195,6 +195,7 @@ function ProjectVisual({ project }) {
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pageRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -212,19 +213,33 @@ export default function App() {
     event.currentTarget.reset();
   };
 
+  const handlePointerMove = (event) => {
+    if (!pageRef.current) return;
+    pageRef.current.style.setProperty('--cursor-x', `${event.clientX}px`);
+    pageRef.current.style.setProperty('--cursor-y', `${event.clientY}px`);
+  };
+
   return (
-    <div className="min-h-screen overflow-hidden bg-[#0B0B0B] text-zinc-100 selection:bg-blue-500/30 selection:text-white">
+    <div
+      ref={pageRef}
+      onPointerMove={handlePointerMove}
+      className="relative min-h-screen overflow-hidden bg-[#0B0B0B] text-zinc-100 selection:bg-blue-500/30 selection:text-white"
+    >
+      <div className="cursor-glow" aria-hidden="true" />
       <div className="pointer-events-none fixed inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.16),transparent_28%),radial-gradient(circle_at_80%_10%,rgba(168,85,247,0.15),transparent_30%),radial-gradient(circle_at_50%_85%,rgba(37,99,235,0.12),transparent_35%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:80px_80px] opacity-25 [mask-image:radial-gradient(ellipse_at_center,black,transparent_72%)]" />
-        {Array.from({ length: 18 }).map((_, index) => (
+        <div className="gradient-blob left-[-12rem] top-24 bg-blue-500/30" />
+        <div className="gradient-blob right-[-14rem] top-[28rem] bg-purple-500/25 animation-delay-blob" />
+        <div className="gradient-blob bottom-[-16rem] left-[35%] bg-cyan-500/20 animation-delay-blob-long" />
+        {Array.from({ length: 32 }).map((_, index) => (
           <span
             key={index}
             className="particle"
             style={{
-              left: `${(index * 47) % 100}%`,
-              animationDelay: `${index * 0.7}s`,
-              animationDuration: `${13 + (index % 5)}s`,
+              left: `${(index * 37) % 100}%`,
+              animationDelay: `${index * 0.45}s`,
+              animationDuration: `${11 + (index % 7)}s`,
             }}
           />
         ))}
